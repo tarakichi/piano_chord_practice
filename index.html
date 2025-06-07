@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>MIDIピアノ</title>
+  <style>
+    .piano { display: flex; }
+    .key {
+      width: 40px; height: 150px;
+      border: 1px solid #000;
+      background-color: white;
+      margin: 1px;
+      position: relative;
+      box-sizing: border-box;
+      transition: background-color 0.2s;
+    }
+    .black {
+      width: 30px; height: 100px;
+      background-color: black;
+      position: absolute;
+      left: 25px;
+      top: 0;
+      z-index: 1;
+    }
+    .pressed {
+      background-color: orange !important;
+    }
+  </style>
+</head>
+<body>
+  <h1>MIDI ピアノ可視化</h1>
+  <div class="piano" id="keyboard">
+    <!-- JSで鍵盤を動的に生成します -->
+  </div>
+
+  <script>
+    const notes = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
+    const keyMap = {};
+
+    function createKeyboard(startNote = 48, numKeys = 24) {
+      const keyboard = document.getElementById('keyboard');
+      for (let i = 0; i < numKeys; i++) {
+        const noteNumber = startNote + i;
+        const noteName = notes[noteNumber % 12] + Math.floor(noteNumber / 12 - 1);
+        const isBlack = notes[noteNumber % 12].includes('#');
+
+        const key = document.createElement('div');
+        key.classList.add('key');
+        key.dataset.note = noteNumber;
+
+        if (isBlack) {
+          key.classList.add('black');
+          key.style.position = 'absolute';
+          key.style.marginLeft = '-15px';
+          key.style.zIndex = '2';
+        }
+
+        keyboard.appendChild(key);
+        keyMap[noteNumber] = key;
+      }
+    }
+
+    createKeyboard(); // C3~B4（48〜71）
+
+    navigator.requestMIDIAccess().then(midi => {
+      for (let input of midi.inputs.values()) {
+        input.onmidimessage = msg => {
+          const [cmd, note, velocity] = msg.data;
+          if (cmd === 144 && velocity > 0) {
+            keyMap[note]?.classList.add('pressed');
+          } else if ((cmd === 128) || (cmd === 144 && velocity === 0)) {
+            keyMap[note]?.classList.remove('pressed');
+          }
+        };
+      }
+    });
+  </script>
+</body>
+</html>
