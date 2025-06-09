@@ -1,33 +1,64 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useEffect, useState } from 'react'
 import './App.css'
 
-function App() {
-  const [count, setCount] = useState(0)
+const noteNames = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B']
+
+function getNoteName(noteNumber: number) {
+  const note = noteNumber % 12
+  const octave = Math.floor(noteNumber / 12) - 1
+  return `${noteNames[note]}${octave}`
+}
+
+function MidiInputViewer() {
+  const [notes, setNotes] = useState<string[]>([])
+
+  useEffect(() => {
+    // MIDIアクセスを要求
+    navigator.requestMIDIAccess().then((access) => {
+      for (const input of access.inputs.values()) {
+        input.onmidimessage = (message) => {
+          if (!message.data) return
+          const [command, noteNumber, velocity] = message.data
+          const noteName = getNoteName(noteNumber)
+          if (command === 144 && velocity > 0) {
+            setNotes((prev) => {
+              if (!prev.includes(noteName)) {
+                return [...prev, noteName]
+              }
+              return prev
+            })
+          }
+          
+          if (command === 128 || (command === 144 && velocity === 0)) {
+            setNotes((prev) => prev.filter((n) => n !== noteName))
+          }
+        }
+      }
+    }).catch((err) => {
+      console.error("MIDI接続に失敗しました:", err)
+    })
+  }, [])
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <h2>MIDI入力</h2>
+      {notes.length === 0 ? (
+        <p>何も押されていません</p>
+      ) : (
+        <ul>
+          {notes.map((note) => (
+            <li key={note}>{note}</li>
+          ))}
+        </ul>
+      )}
+    </>
+  )
+}
+
+function App() {
+  return (
+    <>
+      <MidiInputViewer/>
     </>
   )
 }
