@@ -1,11 +1,15 @@
 import './App.css';
 import MidiInputViewer from './components/MidiInputViewer';
 import ChordDisplay from './components/ChordDisplay';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 function App() {
   const [midiNotes, setMidiNotes] = useState<number[]>([]);
 
+  useEffect(() => {
+    setMidiNotes([60,64,67])
+  },[])
+  
   return (
     <>
       <MidiInputViewer midiNotes={midiNotes} onMidiNotesChange={setMidiNotes}/>
