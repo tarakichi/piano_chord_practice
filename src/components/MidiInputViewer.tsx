@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 
 const noteNames = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B']
 
@@ -8,10 +8,15 @@ function getNoteName(noteNumber: number) {
   return `${noteNames[note]}${octave}`
 }
 
-export default function MidiInputViewer() {
-  const [notes, setNotes] = useState<string[]>([])
+interface Props {
+    notes: string[]
+    onNotesChange: (notes: string[]) => void
+}
+
+export default function MidiInputViewer({ notes, onNotesChange }: Props) {
 
   useEffect(() => {
+    const pressed: Set<string> = new Set()
     // MIDIアクセスを要求
     navigator.requestMIDIAccess().then((access) => {
       for (const input of access.inputs.values()) {
@@ -20,23 +25,20 @@ export default function MidiInputViewer() {
           const [command, noteNumber, velocity] = message.data
           const noteName = getNoteName(noteNumber)
           if (command === 144 && velocity > 0) {
-            setNotes((prev) => {
-              if (!prev.includes(noteName)) {
-                return [...prev, noteName]
-              }
-              return prev
-            })
+            pressed.add(noteName)
           }
           
           if (command === 128 || (command === 144 && velocity === 0)) {
-            setNotes((prev) => prev.filter((n) => n !== noteName))
+            pressed.delete(noteName)
           }
+
+          onNotesChange(Array.from(pressed))
         }
       }
     }).catch((err) => {
       console.error("MIDI接続に失敗しました:", err)
     })
-  }, [])
+  }, [onNotesChange])
 
   return (
     <>
