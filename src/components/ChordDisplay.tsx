@@ -2,22 +2,6 @@ interface Props {
     midiNotes: number[]
 }
 
-// function detectChord(notes: string[]): string | null {
-//     const sortedNotes = notes.map(n => n.slice(0, -1)).sort()
-
-//     const triads = [
-//         ["C", "E", "G"],
-//     ]
-
-//     for (const triad of triads) {
-//         if (triad.every(n => sortedNotes.includes(n))) {
-//             return triad.join("-") + " chord"
-//         }
-//     }
-
-//     return null
-// }
-
 interface ChordTemplate {
   name: string;         // 例: "major", "minor", "7", etc.
   intervals: number[];  // 半音での間隔
@@ -36,41 +20,41 @@ const chordTemplates: ChordTemplate[] = [
     { name: "sus4", intervals: [0, 5, 7] },
     { name: "sus2", intervals: [0, 2, 7] },
     { name: "aug", intervals: [0, 4, 8] },
-    { name: "dim", intervals: [0, 3, 6] },
+    { name: "dim", intervals: [0, 3, 6], aliases: ["m-5"] },
     { name: "dim7", intervals: [0, 3, 6, 9] },
     { name: "m7-5", intervals: [0, 3, 6, 10] },
     { name: "add9", intervals: [0, 4, 7, 14] },
     { name: "madd9", intervals: [0, 3, 7, 14] }
-]
+];
 
 function normalizeNotes(noteNumbers: number[], root: number): number[] {
-  return noteNumbers.map(n => (n - root + 12) % 12).sort((a, b) => a - b)
+  return noteNumbers.map(n => (n - root + 12) % 12).sort((a, b) => a - b);
 }
 
 function detectChordCandidates(noteNumbers: number[]): string[] {
-  const uniqueNotes = Array.from(new Set(noteNumbers.map(n => n % 12)))
+  const uniqueNotes = Array.from(new Set(noteNumbers.map(n => n % 12)));
 
-  const results: string[] = []
+  const results: string[] = [];
 
   for (const root of uniqueNotes) {
-    const normalized = normalizeNotes(noteNumbers, root)
+    const normalized = normalizeNotes(noteNumbers, root);
 
     for (const template of chordTemplates) {
-      const match = template.intervals.every(interval => normalized.includes(interval))
+      const match = template.intervals.every(interval => normalized.includes(interval));
       if (match) {
-        const rootName = noteNames[root] // noteNames[0] = "C", etc.
-        results.push(`${rootName}${template.name}`)
+        const rootName = noteNames[root]; // noteNames[0] = "C", etc.
+        results.push(`${rootName}${template.name}`);
       }
     }
   }
 
-  return results
+  return results;
 }
 
-const noteNames = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B']
+const noteNames = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
 
 export default function ChordDisplay({ midiNotes }: Props) {
-    const chords = detectChordCandidates(midiNotes)
+    const chords = detectChordCandidates(midiNotes);
 
     return (
         <div>
@@ -87,5 +71,5 @@ export default function ChordDisplay({ midiNotes }: Props) {
                 </ul>
             )}
         </div>
-    )
+    );
 }

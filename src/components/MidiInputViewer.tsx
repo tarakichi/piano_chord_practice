@@ -1,28 +1,28 @@
-import { useEffect } from 'react'
+import { useEffect } from 'react';
 
-const noteNames = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B']
+const noteNames = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
 
 function getNoteName(noteNumber: number) {
-  const note = noteNumber % 12
-  const octave = Math.floor(noteNumber / 12) - 1
-  return `${noteNames[note]}${octave}`
+  const note = noteNumber % 12;
+  const octave = Math.floor(noteNumber / 12) - 1;
+  return `${noteNames[note]}${octave}`;
 }
 
 interface Props {
-    midiNotes: number[]
-    onMidiNotesChange: (notes: number[]) => void
+    midiNotes: number[];
+    onMidiNotesChange: (notes: number[]) => void;
 }
 
 export default function MidiInputViewer({ midiNotes, onMidiNotesChange }: Props) {
 
   useEffect(() => {
-    const pressed: Set<number> = new Set()
+    const pressed: Set<number> = new Set();
     // MIDIアクセスを要求
     navigator.requestMIDIAccess().then((access) => {
       for (const input of access.inputs.values()) {
         input.onmidimessage = (message) => {
-          if (!message.data) return
-          const [command, noteNumber, velocity] = message.data
+          if (!message.data) return;
+          const [command, noteNumber, velocity] = message.data;
           if (command === 144 && velocity > 0) {
             pressed.add(noteNumber)
           }
@@ -31,13 +31,13 @@ export default function MidiInputViewer({ midiNotes, onMidiNotesChange }: Props)
             pressed.delete(noteNumber)
           }
 
-          onMidiNotesChange(Array.from(pressed))
+          onMidiNotesChange(Array.from(pressed));
         }
       }
     }).catch((err) => {
-      console.error("MIDI接続に失敗しました:", err)
+      console.error("MIDI接続に失敗しました:", err);
     })
-  }, [onMidiNotesChange])
+  }, [onMidiNotesChange]);
 
   return (
     <>
@@ -52,5 +52,5 @@ export default function MidiInputViewer({ midiNotes, onMidiNotesChange }: Props)
         </ul>
       )}
     </>
-  )
+  );
 }
