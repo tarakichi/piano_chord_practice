@@ -4,12 +4,12 @@ import ChordDisplay from './components/ChordDisplay';
 import { useState } from 'react';
 
 function App() {
-  const [notes, setNotes] = useState<string[]>([])
+  const [midiNotes, setMidiNotes] = useState<number[]>([])
 
   return (
     <>
-      <MidiInputViewer notes={notes} onNotesChange={setNotes}/>
-      <ChordDisplay notes={notes} />
+      <MidiInputViewer midiNotes={midiNotes} onMidiNotesChange={setMidiNotes}/>
+      <ChordDisplay midiNotes={midiNotes} />
     </>
   )
 }
