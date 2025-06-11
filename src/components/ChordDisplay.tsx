@@ -60,6 +60,9 @@ export default function ChordDisplay({ midiNotes }: Props) {
 
     const chordCandidates = detectChords(midiNotes);
 
+    const topChords = chordCandidates.filter((chord) => chord.score === 100);
+    const otherChords = chordCandidates.filter((chord) => chord.score < 100);
+
     return (
         <div>
             {/* <h2>和音の検出</h2>
@@ -75,27 +78,36 @@ export default function ChordDisplay({ midiNotes }: Props) {
                 </ul>
             )} */}
             <h2 className='text-zinc-50 font-bold text-xl'>和音の検出</h2>
-            {midiNotes.length === 0 ? (
-                <p className='text-zinc-50'>キーが押されていません</p>
-            ) : chordCandidates.length === 0 ? (
-                <p className='text-zinc-50'>コードが見つかりません</p>
-            ) : (
-                <ul className='flex justify-center flex-wrap'>
-                    {chordCandidates.map((chord) => (
-                        chord.score === 100 ? (
-                            <li key={chord.fullName} className='mx-1 my-3 rounded-md font-medium text-zinc-50 bg-zinc-800 py-1 px-2'>
-                                {chord.fullName}<br></br>
-                                {chord.score}%
-                            </li>
-                        ) : (
-                            <li key={chord.fullName} className='mx-1 my-3 rounded-md font-medium text-zinc-50 py-1 px-2'>
-                                {chord.fullName}<br></br>
-                                {chord.score}%
-                            </li>
-                        )
-                    ))}
-                </ul>
-            )}
+            <div className="bg-zinc-800 rounded-md m-2">
+                {midiNotes.length === 0 ? (
+                    <p className='text-zinc-50'>キーが押されていません</p>
+                ) : chordCandidates.length === 0 ? (
+                    <p className='text-zinc-50'>コードが見つかりません</p>
+                ) : (
+                    <>
+                        <ul className='flex justify-center flex-wrap'>
+                            {topChords.map((chord) => (
+                                <li
+                                    key={chord.fullName}
+                                    className='mx-1 my-3 rounded-md font-medium text-zinc-50 bg-zinc-700 py-1 px-2'
+                                >
+                                    {chord.fullName}
+                                </li>
+                            ))}
+                        </ul>
+                        <ul className='flex justify-center flex-wrap'>
+                            {otherChords.map((chord) => (
+                                <li
+                                    key={chord.fullName}
+                                    className='mx-1 my-3 rounded-md font-medium text-zinc-50 py-1 px-2'
+                                >
+                                    {chord.fullName}
+                                </li>
+                            ))}
+                        </ul>
+                    </>
+                )}
+            </div>
         </div>
     );
 }

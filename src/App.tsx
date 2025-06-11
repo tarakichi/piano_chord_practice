@@ -7,7 +7,7 @@ function App() {
   const [midiNotes, setMidiNotes] = useState<number[]>([]);
 
   useEffect(() => {
-    setMidiNotes([60,64,67])
+    setMidiNotes([60,63,67,71])
   },[])
   
   return (
