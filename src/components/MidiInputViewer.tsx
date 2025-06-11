@@ -45,7 +45,7 @@ export default function MidiInputViewer({ midiNotes, onMidiNotesChange }: Props)
       {midiNotes.length === 0 ? (
         <p className='text-zinc-50'>何も押されていません</p>
       ) : (
-        <ul className='flex justify-center'>
+        <ul className='flex justify-center flex-wrap'>
           {midiNotes.map((midiNote) => (
             <li key={midiNote} className='mx-1 my-3 rounded-md font-medium text-zinc-50 bg-zinc-800 py-1 px-2'>{getNoteName(midiNote)}</li>
           ))}

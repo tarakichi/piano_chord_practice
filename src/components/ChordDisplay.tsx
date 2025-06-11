@@ -74,18 +74,25 @@ export default function ChordDisplay({ midiNotes }: Props) {
                     ))}
                 </ul>
             )} */}
-            <h2>和音の検出</h2>
+            <h2 className='text-zinc-50 font-bold text-xl'>和音の検出</h2>
             {midiNotes.length === 0 ? (
-                <p>キーが押されていません</p>
+                <p className='text-zinc-50'>キーが押されていません</p>
             ) : chordCandidates.length === 0 ? (
-                <p>コードが見つかりません</p>
+                <p className='text-zinc-50'>コードが見つかりません</p>
             ) : (
-                <ul style={{display: "flex", padding: 0, justifyContent: "center"}}>
+                <ul className='flex justify-center flex-wrap'>
                     {chordCandidates.map((chord) => (
-                        <li key={chord.fullName} style={{listStyle: "none", margin: "0 0.25rem"}}>
-                            {chord.fullName}<br></br>
-                            {chord.score}
-                        </li>
+                        chord.score === 100 ? (
+                            <li key={chord.fullName} className='mx-1 my-3 rounded-md font-medium text-zinc-50 bg-zinc-800 py-1 px-2'>
+                                {chord.fullName}<br></br>
+                                {chord.score}%
+                            </li>
+                        ) : (
+                            <li key={chord.fullName} className='mx-1 my-3 rounded-md font-medium text-zinc-50 py-1 px-2'>
+                                {chord.fullName}<br></br>
+                                {chord.score}%
+                            </li>
+                        )
                     ))}
                 </ul>
             )}
