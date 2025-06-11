@@ -41,13 +41,13 @@ export default function MidiInputViewer({ midiNotes, onMidiNotesChange }: Props)
 
   return (
     <>
-      <h2>MIDI入力</h2>
+      <h2 className='text-zinc-50 font-bold text-xl'>MIDI入力</h2>
       {midiNotes.length === 0 ? (
-        <p>何も押されていません</p>
+        <p className='text-zinc-50'>何も押されていません</p>
       ) : (
-        <ul style={{display: "flex", padding: 0, justifyContent: "center"}}>
+        <ul className='flex justify-center'>
           {midiNotes.map((midiNote) => (
-            <li key={midiNote} style={{listStyle: "none", margin: "0 0.25rem"}}>{getNoteName(midiNote)}</li>
+            <li key={midiNote} className='mx-1 my-3 rounded-md font-medium text-zinc-50 bg-zinc-800 py-1 px-2'>{getNoteName(midiNote)}</li>
           ))}
         </ul>
       )}
