@@ -1,1 +1,13 @@
+.note-list {
+    max-height: 3.5rem;
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-width: 80%;
+}
+.chord-list {
+    max-height: 7rem;
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-width: 80%;
+}
 

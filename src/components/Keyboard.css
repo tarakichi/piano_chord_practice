@@ -1,0 +1,66 @@
+/* 鍵盤全体 */
+.keyboard {
+  position: relative;
+  width: 100%;
+  overflow-x: auto;
+  white-space: nowrap;
+  padding: 1rem;
+  background-color: #333;
+  border-radius: 8px;
+}
+
+/* 白鍵列 */
+.white-keys {
+  display: flex;
+  position: relative;
+  z-index: 1;
+}
+
+.white-key {
+  width: 40px;
+  height: 200px;
+  background-color: white;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  font-size: 10px;
+  color: #444;
+}
+
+.white-key.active {
+  background-color: #b3e5fc;
+}
+
+/* 黒鍵列（上に重ねる） */
+.black-keys {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  padding-left: 30px;
+  z-index: 2;
+  pointer-events: none; /* 重ならないように */
+}
+
+.black-key {
+  width: 25px;
+  height: 120px;
+  background-color: black;
+  margin: 0 -12px;
+  position: relative;
+  z-index: 3;
+  border-radius: 2px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  font-size: 10px;
+  color: white;
+  pointer-events: auto;
+}
+
+.black-key.active {
+  background-color: #80deea;
+}

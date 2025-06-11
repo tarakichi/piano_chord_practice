@@ -1,2 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
 @import "tailwindcss";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .white-key {
+    @apply rounded-md h-80 w-13 bg-zinc-50 border;
+  }
+  .black-key {
+    @apply rounded-md bg-zinc-900;
+  }
+}
