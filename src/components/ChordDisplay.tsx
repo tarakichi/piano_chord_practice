@@ -89,9 +89,35 @@ export default function ChordDisplay({ midiNotes }: Props) {
                             {topChords.map((chord) => (
                                 <li
                                     key={chord.fullName}
-                                    className='mx-1 my-3 rounded-md font-medium text-zinc-50 bg-zinc-700 py-1 px-2'
+                                    title={`一致度：${chord.score}%`}
+                                    className="
+                                        relative group mx-1 my-3
+                                        hover:shadow-lg hover:shadow-zinc-500/50 hover:brightness-110
+                                        transiton duration-200 ease-in-out
+                                    "
                                 >
-                                    {chord.fullName}
+                                    <span
+                                        className="
+                                            rounded-md font-medium text-zinc-50 bg-zinc-700 py-1 px-2
+                                            hover:text-shadow-lg hover:text-shadow-zinc-500/50
+                                            transiton duration-200 ease-in-out
+                                        "
+                                    >
+                                        {chord.fullName}
+                                    </span>
+                                    <div
+                                        className="
+                                            absolute bottom-full left-1/2 -translate-x-1/2 mb-2
+                                            w-max px-2 py-1 rounded bg-zinc-900 text-zinc-50 text-xs
+                                            opacity-0 group-hover:opacity-100
+                                            transition-opacity duration-200
+                                            pointer-events-none
+                                            z-10
+                                        "
+                                    >
+                                        一致度：{chord.score}%
+                                        <div className="absolute top-full left-1/2 -translate-x-1/2 -translate-y-1 w-2 h-2 bg-zinc-900 rotate-45"></div>
+                                    </div>
                                 </li>
                             ))}
                         </ul>
@@ -99,9 +125,30 @@ export default function ChordDisplay({ midiNotes }: Props) {
                             {otherChords.map((chord) => (
                                 <li
                                     key={chord.fullName}
-                                    className='mx-1 my-3 rounded-md font-medium text-zinc-50 py-1 px-2'
+                                    className="relative group mx-1 my-3"
                                 >
-                                    {chord.fullName}
+                                    <span
+                                        className="
+                                            rounded-md font-medium text-zinc-50 bg-zinc-800 py-1 px-2
+                                            hover:text-shadow-lg hover:text-shadow-zinc-500/50
+                                            transiton duration-200 ease-in-out
+                                        "
+                                    >
+                                        {chord.fullName}
+                                    </span>
+                                    <div
+                                        className="
+                                            absolute bottom-full left-1/2 -translate-x-1/2 mb-2
+                                            w-max px-2 py-1 rounded bg-zinc-900 text-zinc-50 text-xs
+                                            opacity-0 group-hover:opacity-100
+                                            transition-opacity duration-200
+                                            pointer-events-none
+                                            z-10
+                                        "
+                                    >
+                                        一致度：{chord.score}%
+                                        <div className="absolute top-full left-1/2 -translate-x-1/2 -translate-y-1 w-2 h-2 bg-zinc-900 rotate-45"></div>
+                                    </div>
                                 </li>
                             ))}
                         </ul>
