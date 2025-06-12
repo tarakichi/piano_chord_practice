@@ -17,9 +17,9 @@ export default function ChordDisplay({ midiNotes }: Props) {
             <h2 className='text-zinc-50 font-bold text-xl'>和音の検出</h2>
             <div className="bg-zinc-800 rounded-md my-2 mx-auto chord-list">
                 {midiNotes.length === 0 ? (
-                    <p className='text-zinc-50'>キーが押されていません</p>
+                    <p className='mx-1 my-3 py-1 px-2 text-zinc-50'>キーが押されていません</p>
                 ) : chordCandidates.length === 0 ? (
-                    <p className='text-zinc-50'>コードが見つかりません</p>
+                    <p className='mx-1 my-3 py-1 px-2 text-zinc-50'>コードが見つかりません</p>
                 ) : (
                     <>
                         <ul className='flex justify-center flex-wrap'>

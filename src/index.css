@@ -1,15 +1,29 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
 @import "tailwindcss";
 
-@tailwind base;
-@tailwind components;
 @tailwind utilities;
 
 @layer components {
-  .white-key {
-    @apply rounded-md h-80 w-13 bg-zinc-50 border;
-  }
-  .black-key {
-    @apply rounded-md bg-zinc-900;
-  }
+    .white-key {
+        @apply rounded-md h-80 w-14 bg-zinc-50 outline-1 outline-zinc-900 -outline-offset-1;
+    }
+    .black-key-frame {
+        @apply rounded-md h-55 w-8 mr-6
+    }
+    .black-key {
+        @apply bg-zinc-900;
+    }
+    .white-key.active {
+        @apply bg-zinc-400 translate-y-2
+    }
+    .black-key.active {
+        @apply bg-zinc-950 translate-y-2
+    }
+
+    .note-list {
+        @apply max-h-14 overflow-x-hidden overflow-y-auto max-w-4/5 h-14
+    }
+    .chord-list {
+        @apply max-h-28 overflow-x-hidden overflow-y-auto max-w-4/5 h-28
+    }
 }
