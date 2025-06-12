@@ -1,7 +1,7 @@
 interface ChordTemplate {
-  name: string;         // 例: "major", "minor", "7", etc.
-  intervals: number[];  // 半音での間隔
-  aliases?: string[];   // 表記のゆれなど
+  name: string;
+  intervals: number[];
+  aliases?: string[];
 }
 
 interface ChordCandidate {
@@ -26,8 +26,8 @@ const chordTemplates: ChordTemplate[] = [
     { name: "dim", intervals: [0, 3, 6], aliases: ["m-5"] },
     { name: "dim7", intervals: [0, 3, 6, 9] },
     { name: "m7-5", intervals: [0, 3, 6, 10] },
-    { name: "add9", intervals: [0, 4, 7, 14] },
-    { name: "madd9", intervals: [0, 3, 7, 14] }
+    { name: "add9", intervals: [0, 4, 7, 2] },
+    { name: "madd9", intervals: [0, 3, 7, 2] }
 ];
 
 const noteNames = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
