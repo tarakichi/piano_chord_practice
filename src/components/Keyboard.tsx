@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 interface Props {
     activeNotes?: number[];
 }
@@ -25,14 +27,26 @@ const keys = [
     { note: "B", isBlack: false },
 ];
 
-export default function OneOctaveKeyboard({ activeNotes = [] }: Props) {
+export default function Keyboard({ activeNotes = [] }: Props) {
 
+    const [isFullRange, setIsFullRange] = useState(false);
     const uniqueActiveNotes = Array.from(new Set(activeNotes.map(n => getNoteName(n % 12).slice(0, -2))));
 
     console.log(uniqueActiveNotes);
 
     return (
-        <div className="w-screen">
+        <div className="w-screen flex flex-col justify-center items-center">
+            <div className="keyboard-toggle-container">
+                <label className="switch">
+                    <input
+                        type="checkbox"
+                        checked={isFullRange}
+                        onChange={() => setIsFullRange(!isFullRange)}
+                    />
+                    <span className="slider round"></span>
+                </label>
+                <span className="m-2 text-zinc-50">{isFullRange ? "88鍵" : "1オクターブ"}</span>
+            </div>
             <div className="flex justify-center mx-auto mt-2 mb-5 w-4/5 h-80">
                     <ul className="absolute white-keys flex">
                         {keys.filter(k => !k.isBlack).map(k => (

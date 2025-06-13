@@ -26,4 +26,27 @@
     .chord-list {
         @apply max-h-28 overflow-x-hidden overflow-y-auto max-w-4/5 h-28
     }
+
+    .keyboard-toggle-container {
+        @apply flex items-center
+    }
+    .switch {
+        @apply relative w-10 h-5 inline-block
+    }
+    .switch input {
+        @apply opacity-0 w-0 h-0
+    }
+    .slider {
+        @apply absolute cursor-pointer bg-zinc-400 rounded-full top-0 left-0 right-0 bottom-0 duration-400
+    }
+    .slider::before {
+        content: "";
+        @apply absolute h-4 w-4 left-0.5 bottom-0.5 bg-white rounded-full duration-400
+    }
+    input:checked + .slider {
+        @apply bg-emerald-500
+    }
+    input:checked + .slider::before {
+        @apply translate-x-5
+    }
 }
