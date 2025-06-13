@@ -13,11 +13,8 @@
     .black-key {
         @apply bg-zinc-900;
     }
-    .white-key.active {
-        @apply bg-zinc-400 translate-y-2
-    }
-    .black-key.active {
-        @apply bg-zinc-950 translate-y-2
+    .active {
+        @apply brightness-60 translate-y-2
     }
 
     .note-list {
@@ -27,9 +24,6 @@
         @apply max-h-28 overflow-x-hidden overflow-y-auto max-w-4/5 h-28
     }
 
-    .keyboard-toggle-container {
-        @apply flex items-center
-    }
     .switch {
         @apply relative w-10 h-5 inline-block
     }
