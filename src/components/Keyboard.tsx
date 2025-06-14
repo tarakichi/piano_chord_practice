@@ -111,7 +111,7 @@ export default function Keyboard({ activeNotes = [] }: Props) {
     const [isFullRange, setIsFullRange] = useState(false);
     const activeNotesName = Array.from(activeNotes.map(n => getNoteName(n)));
     // const uniqueActiveNotesName = Array.from(new Set(activeNotesName.map(n => n.slice(0, -1))));
-    const keys = isFullRange ? generateKeyboardRange(0, 88) : generateKeyboardRange(60, 71);
+    const keys = isFullRange ? generateKeyboardRange(21, 108) : generateKeyboardRange(60, 71);
 
     return (
         <>
@@ -127,18 +127,18 @@ export default function Keyboard({ activeNotes = [] }: Props) {
                             />
                             <span className="slider round"></span>
                         </label>
-                        <span className="m-2 text-zinc-50">{isFullRange ? "88鍵" : "1オクターブ"}</span>
+                        <span className="m-2 text-zinc-50">{isFullRange ? "88鍵" : "88鍵"}</span>
                     </div>
                 </div>
             </div>
-            <div className="overflow-x-auto w-full">
-                <div className={`relative flex justify-center mx-auto mt-2 mb-5 w-fit h-80 ${isFullRange ? "translate-x-255" : ""}`}>
-                    <ul className="absolute white-keys flex">
+            <div className="overflow-x-auto w-screen px-10">
+                <div className="relative mx-auto mt-2 mb-5 w-fit h-80">
+                    <ul className="white-keys flex">
                         {generateWhiteKeyRenderItems(keys, activeNotesName, isFullRange).map(item => (
                             <li key={item.key} className={item.className}></li>
                         ))}
                     </ul>
-                    <ul className={"absolute black-keys flex z-10 translate-x-3"}>
+                    <ul className={"absolute black-keys flex z-10 top-0 -left-4"}>
                         {generateBlackKeyRenderItems(keys, activeNotesName, isFullRange).map(item => (
                             <li key={item.key} className={item.className}></li>
                         ))}
