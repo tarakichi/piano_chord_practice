@@ -22,21 +22,20 @@ export default function ChordDisplay({ midiNotes }: Props) {
                     <p className='mx-1 my-3 py-1 px-2 text-zinc-50'>コードが見つかりません</p>
                 ) : (
                     <>
-                        <div className='flex justify-center flex-wrap'>
+                        <ul className='flex justify-center flex-wrap'>
                             {topChords.map((chord) => (
-                                <Tooltip.Provider delayDuration={100}>
+                                <Tooltip.Provider delayDuration={100} key={chord.fullName}>
                                     <Tooltip.Root>
                                         <Tooltip.Trigger asChild>
-                                            <div
+                                            <li
                                                 className="
                                                     mx-1 my-3 rounded-md font-medium text-zinc-50 bg-zinc-700 py-1 px-2
                                                     hover:shadow-lg hover:shadow-zinc-500/50 hover:brightness-110
                                                     transiton duration-200 ease-in-out
                                                 "
-                                                key={chord.fullName}
                                             >
                                                 {chord.fullName}
-                                            </div>
+                                            </li>
                                         </Tooltip.Trigger>
                                         <Tooltip.Portal>
                                             <Tooltip.Content
@@ -52,22 +51,21 @@ export default function ChordDisplay({ midiNotes }: Props) {
                                     </Tooltip.Root>
                                 </Tooltip.Provider>
                             ))}
-                        </div>
-                        <div className='flex justify-center flex-wrap'>
+                        </ul>
+                        <ul className='flex justify-center flex-wrap'>
                             {otherChords.map((chord) => (
-                                <Tooltip.Provider delayDuration={100}>
+                                <Tooltip.Provider delayDuration={100} key={chord.fullName}>
                                     <Tooltip.Root>
                                         <Tooltip.Trigger asChild>
-                                            <div
+                                            <li
                                                 className="
                                                     mx-1 my-3 rounded-md font-medium text-zinc-50 bg-zinc-800 py-1 px-2
                                                     hover:text-shadow-lg hover:text-shadow-zinc-500/50
                                                     transiton duration-200 ease-in-out
                                                 "
-                                                key={chord.fullName}
                                             >
                                                 {chord.fullName}
-                                            </div>
+                                            </li>
                                         </Tooltip.Trigger>
                                         <Tooltip.Portal>
                                             <Tooltip.Content
@@ -83,7 +81,7 @@ export default function ChordDisplay({ midiNotes }: Props) {
                                     </Tooltip.Root>
                                 </Tooltip.Provider>
                             ))}
-                        </div>
+                        </ul>
                     </>
                 )}
             </div>
