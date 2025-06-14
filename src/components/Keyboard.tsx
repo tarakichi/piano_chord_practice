@@ -144,7 +144,6 @@ export default function Keyboard({ activeNotes = [] }: Props) {
                     </ul>
                 </div>
             </div>
-            
         </>
     )
 }

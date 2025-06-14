@@ -1,24 +1,18 @@
-import './App.css';
-import MidiInputViewer from './components/MidiInputViewer';
-import ChordDisplay from './components/ChordDisplay';
-import { useEffect, useState } from 'react';
-import Keyboard from './components/Keyboard';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import HomeMenu from "./pages/HomeMenu";
+import CodeViewer from "./pages/CodeViewer";
+import CodePractice from "./pages/CodePractice";
 
 function App() {
-  const [midiNotes, setMidiNotes] = useState<number[]>([]);
-
-  useEffect(() => {
-    setMidiNotes([60,63,67,71])
-    // setMidiNotes([60,63,67,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86])
-  },[])
-
   return (
-    <>
-      <MidiInputViewer midiNotes={midiNotes} onMidiNotesChange={setMidiNotes}/>
-      <Keyboard activeNotes={midiNotes}/>
-      <ChordDisplay midiNotes={midiNotes} />
-    </>
-  );
+    <Router>
+      <Routes>
+        <Route path="/" element={<HomeMenu/>} />
+        <Route path="/viewer" element={<CodeViewer/>} />
+        <Route path="/practice" element={<CodePractice/>} />
+      </Routes>
+    </Router>
+  )
 }
 
 export default App;
