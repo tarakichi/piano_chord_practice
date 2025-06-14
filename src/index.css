@@ -35,7 +35,7 @@
     }
     .slider::before {
         content: "";
-        @apply absolute h-4 w-4 left-0.5 bottom-0.5 bg-white rounded-full duration-400
+        @apply absolute h-4 w-4 left-0.5 bottom-0.5 bg-zinc-50 rounded-full duration-400
     }
     input:checked + .slider {
         @apply bg-emerald-500

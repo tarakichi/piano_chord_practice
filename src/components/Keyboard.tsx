@@ -71,26 +71,26 @@ function generateBlackKeyRenderItems(
     isFullRange: boolean
 ): RenderItem[] {
     const items: RenderItem[] = [];
-    keys.map((k, i) => {
+    keys.forEach((k, i) => {
         if (!k.isBlack && i == 0) {
             items.push({
                 key: `empty-${i}-1`,
                 isKey: false,
-                className: "black-key-frame if1"
+                className: "black-key-frame"
             })
         }
         if (!k.isBlack && i == keys.length - 1) {
             items.push({
                 key: `empty-${i}-2`,
                 isKey: false,
-                className: "black-key-frame if2"
+                className: "black-key-frame"
             })
         }
         if((!k.isBlack && k.noteName == "F" && keys[i - 1]) || (!k.isBlack && k.noteName == "C" && keys[i - 1])) {
             items.push({
                 key: `empty-${i}-3`,
                 isKey: false,
-                className: "black-key-frame if3"
+                className: "black-key-frame"
             })
         }
         if (k.isBlack) {
@@ -109,8 +109,7 @@ function generateBlackKeyRenderItems(
 export default function Keyboard({ activeNotes = [] }: Props) {
 
     const [isFullRange, setIsFullRange] = useState(false);
-    const activeNotesName = Array.from(activeNotes.map(n => getNoteName(n)));
-    // const uniqueActiveNotesName = Array.from(new Set(activeNotesName.map(n => n.slice(0, -1))));
+    const activeNotesName = activeNotes.map(n => getNoteName(n));
     const keys = isFullRange ? generateKeyboardRange(21, 108) : generateKeyboardRange(60, 71);
 
     return (
@@ -131,8 +130,8 @@ export default function Keyboard({ activeNotes = [] }: Props) {
                     </div>
                 </div>
             </div>
-            <div className="overflow-x-auto w-screen px-10">
-                <div className="relative mx-auto mt-2 mb-5 w-fit h-80">
+            <div className="overflow-x-auto overflow-y-hidden w-screen h-87 px-10 mt-3">
+                <div className="relative mx-auto mt-2 mb-5 w-fit">
                     <ul className="white-keys flex">
                         {generateWhiteKeyRenderItems(keys, activeNotesName, isFullRange).map(item => (
                             <li key={item.key} className={item.className}></li>
