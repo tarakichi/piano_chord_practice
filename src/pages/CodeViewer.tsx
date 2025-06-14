@@ -9,7 +9,7 @@ export default function CodeViewer() {
   return (
     <>
       <MidiInputViewer midiNotes={midiNotes} onMidiNotesChange={setMidiNotes}/>
-      <Keyboard activeNotes={midiNotes}/>
+      <Keyboard midiNotes={midiNotes}/>
       <ChordDisplay midiNotes={midiNotes}/>
     </>
   );

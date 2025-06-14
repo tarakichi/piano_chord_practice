@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 interface Props {
-    activeNotes?: number[];
+    midiNotes?: number[];
 }
 
 const noteNames = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
@@ -106,10 +106,10 @@ function generateBlackKeyRenderItems(
     return items;
 }
 
-export default function Keyboard({ activeNotes = [] }: Props) {
+export default function Keyboard({ midiNotes = [] }: Props) {
 
     const [isFullRange, setIsFullRange] = useState(false);
-    const activeNotesName = activeNotes.map(n => getNoteName(n));
+    const activeNotesName = midiNotes.map(n => getNoteName(n));
     const keys = isFullRange ? generateKeyboardRange(21, 108) : generateKeyboardRange(60, 71);
 
     return (
