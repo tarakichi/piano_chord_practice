@@ -7,9 +7,9 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<HomeMenu/>} />
-        <Route path="/viewer" element={<ChordViewer/>} />
-        <Route path="/practice" element={<ChordPractice/>} />
+          <Route path="/" element={<HomeMenu/>} />
+          <Route path="/viewer" element={<ChordViewer/>} />
+          <Route path="/practice" element={<ChordPractice/>} />
       </Routes>
     </Router>
   )
