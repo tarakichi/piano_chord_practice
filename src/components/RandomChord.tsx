@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const chordList = [
   "C", "Cm", "C7", "CM7", "Cm7",
@@ -21,7 +21,23 @@ export default function RandomChord({ midiNotes }: Props) {
         const randomIndex = Math.floor(Math.random() * chordList.length);
         setCurrentChord(chordList[randomIndex]);
     };
+
+    useEffect(() => {
+        pickRandomChord()
+    })
+
     return (
-        <></>
+        <div className="my-5">
+            <h2 className='text-zinc-50 font-bold text-xl'>目標コード</h2>
+            <div className='flex justify-center bg-zinc-800 rounded-md my-2 mx-auto max-h-16 overflow-x-hidden overflow-y-auto max-w-4/5 h-16'>
+                <div
+                    className="
+                        mx-1 my-3 rounded-md font-medium text-2xl text-zinc-50 bg-zinc-700 py-1 px-2
+                        hover:shadow-lg hover:shadow-zinc-500/50 hover:brightness-110
+                        transiton duration-200 ease-in-out
+                    "
+                >{currentChord}</div>
+            </div>
+        </div>
     )
 }

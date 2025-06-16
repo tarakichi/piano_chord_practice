@@ -55,9 +55,9 @@ export default function MidiInputViewer({ midiNotes, onMidiNotesChange }: Props)
                     hover:shadow-lg hover:shadow-zinc-500/50 hover:brightness-110
                     transiton duration-200 ease-in-out
                 "
-            >
+              >
                 {getNoteName(midiNote)}
-            </li>
+              </li>
             ))}
           </ul>
         )}
