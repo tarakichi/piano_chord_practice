@@ -14,7 +14,7 @@ interface Props {
     midiNotes: number[]
 }
 
-export default function RandomChord({ midiNotes }: Props) {
+export default function TargetChord({ midiNotes }: Props) {
     const [currentChord, setCurrentChord] = useState<string | null>(null);
 
     const pickRandomChord = () => {
