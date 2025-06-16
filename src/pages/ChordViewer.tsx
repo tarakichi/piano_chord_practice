@@ -3,7 +3,7 @@ import ChordDisplay from '../components/ChordDisplay';
 import { useState } from 'react';
 import Keyboard from '../components/Keyboard';
 
-export default function CodeViewer() {
+export default function ChordViewer() {
   const [midiNotes, setMidiNotes] = useState<number[]>([]);
 
   return (

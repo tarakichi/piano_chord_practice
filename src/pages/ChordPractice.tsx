@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import Keyboard from '../components/Keyboard';
 import TargetChord from '../components/TargetChord';
 
-export default function CodePractice() {
+export default function ChordPractice() {
   const [midiNotes, setMidiNotes] = useState<number[]>([]);
 
   useEffect(() => {
