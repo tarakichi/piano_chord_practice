@@ -8,10 +8,19 @@ import { chordMatch } from '../utils/chordMatch';
 
 export default function ChordPractice() {
   const [midiNotes, setMidiNotes] = useState<number[]>([]);
+  const [question, setQuestion] = useState(getTargetChord());
+  const [userChords, setUserChords] = useState<string[]>([]);
+  const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
 
   useEffect(() => {
-    // setMidiNotes([60,63,67,71]);
-  },[midiNotes])
+    if (chordMatch(userChords, question)) {
+      setIsCorrect(true);
+      setTimeout(() => {
+        setQuestion(getTargetChord());
+        setIsCorrect(null);
+      })
+    }
+  },[userChords, question])
 
   return (
     <motion.div
@@ -21,7 +30,7 @@ export default function ChordPractice() {
     >
       <MidiInputViewer midiNotes={midiNotes} onMidiNotesChange={setMidiNotes}/>
       <Keyboard midiNotes={midiNotes}/>
-      <ChordDisplay midiNotes={midiNotes}/>
+      <ChordDisplay midiNotes={midiNotes} setUserChords={setUserChords([])}/>
     </motion.div>
   );
 }

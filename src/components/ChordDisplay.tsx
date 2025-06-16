@@ -3,13 +3,20 @@ import * as Tooltip from "@radix-ui/react-tooltip"
 
 interface Props {
     midiNotes: number[]
+    setUserChords?: (data: string[]) => void;
 }
 
-export default function ChordDisplay({ midiNotes }: Props) {
+export default function ChordDisplay({ midiNotes, setUserChords }: Props) {
 
     const chordCandidates = detectChords(midiNotes);
 
     const topChords = chordCandidates.filter((chord) => chord.score === 100);
+    if (setUserChords) {
+        setUserChords(topChords.map((chord) => {
+            return chord.fullName;
+        }));
+    }
+
     const otherChords = chordCandidates.filter((chord) => chord.score < 100);
 
     return (
