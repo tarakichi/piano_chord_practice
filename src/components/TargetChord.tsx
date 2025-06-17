@@ -60,7 +60,7 @@ export default function TargetChord({ midiNotes, setMidiNotes }: Props) {
             setTarget(getTargetChord());
             celebrate();
         }
-    }, [midiNotes, isCorrect, target]);
+    }, [midiNotes, isCorrect, target, setMidiNotes]);
 
     return (
         <div className="mb-5">
