@@ -35,6 +35,11 @@ function celebrate() {
         spread: 70,
         origin: { y: 0.6 },
     });
+
+    const sound = new Audio("/sounds/Jpn_S_drum.mp3");
+    sound.play().catch(e => {
+        console.warn("音声の再生に失敗しました:", e);
+    })
 }
 
 export default function TargetChord({ midiNotes }: Props) {
@@ -60,11 +65,11 @@ export default function TargetChord({ midiNotes }: Props) {
             <h2 className='text-zinc-50 font-bold text-xl'>目標コード</h2>
             <div className="flex justify-center items-center bg-zinc-800 rounded-md my-2 mx-auto overflow-x-hidden overflow-y-auto max-w-4/5">
                 <div
-                    className="
+                    className={`
                         mx-1 my-3 rounded-md font-medium text-2xl text-zinc-50 bg-zinc-700 py-3 px-5
                         hover:shadow-lg hover:shadow-zinc-500/50 hover:brightness-110
-                        transiton duration-200 ease-in-out
-                    "
+                        transiton duration-200 ease-in-out ${isCorrect ? "brightness-150" : ""}
+                    `}
                 >
                     {target}
                 </div>
