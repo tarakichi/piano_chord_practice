@@ -14,9 +14,9 @@ export default function ChordPractice() {
       animate={{ opacity: 1 }}
       transition={{ duration: 1 }}
     >
-      <TargetChord midiNotes={midiNotes}/>
+      <TargetChord midiNotes={midiNotes} setMidiNotes={setMidiNotes}/>
       <MidiInputViewer midiNotes={midiNotes} onMidiNotesChange={setMidiNotes}/>
-      <Keyboard midiNotes={midiNotes}/>
+      <Keyboard midiNotes={midiNotes} setMidiNotes={setMidiNotes}/>
       <ChordDisplay midiNotes={midiNotes}/>
     </motion.div>
   );

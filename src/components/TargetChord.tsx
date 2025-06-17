@@ -4,6 +4,7 @@ import confetti from "canvas-confetti";
 
 interface Props {
     midiNotes: number[];
+    setMidiNotes: (midiNotes: number[]) => void;
 }
 
 const chordList = [
@@ -42,7 +43,7 @@ function celebrate() {
     })
 }
 
-export default function TargetChord({ midiNotes }: Props) {
+export default function TargetChord({ midiNotes, setMidiNotes }: Props) {
     const [target, setTarget] = useState<string | null>(null);
     const [isCorrect, setIsCorrect] = useState<boolean>(false);
 
@@ -54,6 +55,7 @@ export default function TargetChord({ midiNotes }: Props) {
             setIsCorrect(chordMatch(chordCandidates, target));
         }
         if (isCorrect) {
+            setMidiNotes([]);
             setIsCorrect(false);
             setTarget(getTargetChord());
             celebrate();
