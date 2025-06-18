@@ -9,7 +9,7 @@ export function useMidiInput() {
       .then((access) => {
         for (const input of access.inputs.values()) {
           input.onmidimessage = ({ data }) => {
-            if (!data) return;
+            if (!data) return; //要調整
             const [cmd, note, vel] = data;
             if (cmd === 144 && vel > 0) pressed.add(note);
             if (cmd === 128 || (cmd === 144 && vel === 0)) pressed.delete(note);
