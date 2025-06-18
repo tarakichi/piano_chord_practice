@@ -1,26 +1,23 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
-export function useMidiInput(onMidiNotesChange: (notes: number[]) => void) {
+export function useMidiInput() {
+  const [midiNotes, setMidiNotes] = useState<number[]>([]);
+  
   useEffect(() => {
-    const pressed: Set<number> = new Set();
-    // MIDIアクセスを要求
-    navigator.requestMIDIAccess().then((access) => {
-      for (const input of access.inputs.values()) {
-        input.onmidimessage = (message) => {
-          if (!message.data) return;
-          const [command, noteNumber, velocity] = message.data;
-          if (command === 144 && velocity > 0) {
-            pressed.add(noteNumber)
+    const pressed = new Set<number>();
+    navigator.requestMIDIAccess()
+      .then((access) => {
+        for (const input of access.inputs.values()) {
+          input.onmidimessage = ({ data }) => {
+            if (!data) return;
+            const [cmd, note, vel] = data;
+            if (cmd === 144 && vel > 0) pressed.add(note);
+            if (cmd === 128 || (cmd === 144 && vel === 0)) pressed.delete(note);
+            setMidiNotes(Array.from(pressed));
           }
-          
-          if (command === 128 || (command === 144 && velocity === 0)) {
-            pressed.delete(noteNumber)
-          }
-            onMidiNotesChange(Array.from(pressed));
         }
-      }
-    }).catch((err) => {
-      console.error("MIDI接続に失敗しました:", err);
-    })
-  }, [onMidiNotesChange]);
+      }).catch(console.error);
+  }, []);
+
+  return midiNotes;
 }
