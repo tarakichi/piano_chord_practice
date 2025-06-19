@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 export function useMidiInput() {
   const [midiNotes, setMidiNotes] = useState<number[]>([]);
@@ -19,5 +19,13 @@ export function useMidiInput() {
       }).catch(console.error);
   }, []);
 
-  return midiNotes;
+  const addNote = useCallback((note: number) => {
+    setMidiNotes((prev) => Array.from(new Set([...prev, note])));
+  }, []);
+
+  const removeNote = useCallback((note: number) => {
+    setMidiNotes((prev) => prev.filter((n) => n !== note));
+  }, []);
+
+  return { midiNotes, addNote, removeNote };
 }
