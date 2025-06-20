@@ -27,5 +27,9 @@ export function useMidiInput() {
     setMidiNotes((prev) => prev.filter((n) => n !== note));
   }, []);
 
-  return { midiNotes, addNote, removeNote };
+  const clearNotes = useCallback(() => {
+    setMidiNotes([]);
+  }, [])
+
+  return { midiNotes, addNote, removeNote, clearNotes };
 }

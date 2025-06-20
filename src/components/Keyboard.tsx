@@ -2,7 +2,8 @@ import { useState } from "react";
 
 interface Props {
     midiNotes?: number[];
-    setMidiNotes: (midiNotes: number[]) => void;
+    addNote: (note: number) => void;
+    removeNote: (note: number) => void;
 }
 
 const noteNames = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
@@ -25,6 +26,7 @@ interface PianoKey {
 interface RenderItem {
     key: string;
     isKey: boolean;
+    isActive: boolean;
     className: string;
     midi?: number;
 }
@@ -62,6 +64,7 @@ function generateWhiteKeyRenderItems(
         return {
             key: k.pitch,
             isKey: true,
+            isActive: isActive,
             className: `white-key${isActive ? " active" : ""}`,
             midi: k.midi
         };
@@ -79,6 +82,7 @@ function generateBlackKeyRenderItems(
             items.push({
                 key: `empty-${i}-1`,
                 isKey: false,
+                isActive: false,
                 className: "black-key-frame",
             })
         }
@@ -86,6 +90,7 @@ function generateBlackKeyRenderItems(
             items.push({
                 key: `empty-${i}-2`,
                 isKey: false,
+                isActive: false,
                 className: "black-key-frame",
             })
         }
@@ -93,6 +98,7 @@ function generateBlackKeyRenderItems(
             items.push({
                 key: `empty-${i}-3`,
                 isKey: false,
+                isActive: false,
                 className: "black-key-frame",
             })
         }
@@ -101,6 +107,7 @@ function generateBlackKeyRenderItems(
             items.push({
                 key: k.pitch,
                 isKey: true,
+                isActive: isActive,
                 className: `black-key${isActive ? " active": ""}`,
                 midi: k.midi
             });
@@ -110,24 +117,11 @@ function generateBlackKeyRenderItems(
     return items;
 }
 
-export default function Keyboard({ midiNotes = [], setMidiNotes }: Props) {
+export default function Keyboard({ midiNotes = [], addNote, removeNote }: Props) {
 
     const [isFullRange, setIsFullRange] = useState(false);
     const activeNotesName = midiNotes.map(n => getNoteName(n));
     const keys = isFullRange ? generateKeyboardRange(21, 108) : generateKeyboardRange(60, 71);
-
-    const pianoKeyPress = (midiNotes: number[], note: number): void => {
-        const pressed: Set<number> = new Set();
-        for (let i = 0; i < midiNotes.length; i++) {
-            pressed.add(midiNotes[i]);
-        }
-        if (midiNotes.find((n) => n === note)) {
-            pressed.delete(note);
-        } else {
-            pressed.add(note);
-        }
-        setMidiNotes(Array.from(pressed));
-    }
 
     return (
         <>
@@ -151,12 +145,12 @@ export default function Keyboard({ midiNotes = [], setMidiNotes }: Props) {
                 <div className="relative mx-auto mt-2 mb-5 w-fit">
                     <ul className="white-keys flex">
                         {generateWhiteKeyRenderItems(keys, activeNotesName, isFullRange).map(item => (
-                            <li key={item.key} className={item.className} onClick={() => item.midi ? pianoKeyPress(midiNotes, item.midi) : undefined}></li>
+                            <li key={item.key} className={item.className} onClick={() => item.midi ? (item.isActive ? removeNote(item.midi) : addNote(item.midi)) : undefined}></li>
                         ))}
                     </ul>
                     <ul className={"absolute black-keys flex z-10 top-0 -left-4"}>
                         {generateBlackKeyRenderItems(keys, activeNotesName, isFullRange).map(item => (
-                            <li key={item.key} className={item.className} onClick={() => item.midi ? pianoKeyPress(midiNotes, item.midi) : undefined}></li>
+                            <li key={item.key} className={item.className} onClick={() => item.midi ? (item.isActive ? removeNote(item.midi) : addNote(item.midi)) : undefined}></li>
                         ))}
                     </ul>
                 </div>
