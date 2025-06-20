@@ -108,7 +108,7 @@ function generateBlackKeyRenderItems(
                 key: k.pitch,
                 isKey: true,
                 isActive: isActive,
-                className: `black-key${isActive ? " active": ""}`,
+                className: `black-key pointer-events-auto${isActive ? " active": ""}`,
                 midi: k.midi
             });
         }
@@ -148,7 +148,7 @@ export default function Keyboard({ midiNotes = [], addNote, removeNote }: Props)
                             <li key={item.key} className={item.className} onClick={() => item.midi ? (item.isActive ? removeNote(item.midi) : addNote(item.midi)) : undefined}></li>
                         ))}
                     </ul>
-                    <ul className={"absolute black-keys flex z-10 top-0 -left-4"}>
+                    <ul className={"absolute black-keys flex z-10 top-0 -left-4 pointer-events-none"}>
                         {generateBlackKeyRenderItems(keys, activeNotesName, isFullRange).map(item => (
                             <li key={item.key} className={item.className} onClick={() => item.midi ? (item.isActive ? removeNote(item.midi) : addNote(item.midi)) : undefined}></li>
                         ))}

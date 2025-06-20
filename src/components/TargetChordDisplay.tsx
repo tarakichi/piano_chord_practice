@@ -3,7 +3,7 @@ interface Props {
     isCorrect: boolean;
 }
 
-export default function TargetChord({ targetChord, isCorrect }: Props) {
+export default function TargetChordDisplay({ targetChord, isCorrect }: Props) {
     return (
         <div className="mb-5">
             <h2 className='text-zinc-50 font-bold text-xl'>目標コード</h2>
@@ -17,7 +17,16 @@ export default function TargetChord({ targetChord, isCorrect }: Props) {
                 >
                     {targetChord}
                 </div>
-                {isCorrect === true ? (<div className="absolute">正解</div>) : ("")}
+                {isCorrect === true ? (<div
+                    className="absolute mx-1 my-3 rounded-md font-medium text-2xl text-zinc-50 bg-zinc-700 py-3 px-5"
+                >
+                    正解
+                </div>) : ("")}
+                {/* <div
+                    className="absolute mx-1 my-3 rounded-md font-medium text-2xl text-zinc-50 bg-zinc-700 py-3 px-5"
+                >
+                    正解
+                </div> */}
             </div>
         </div>
     )

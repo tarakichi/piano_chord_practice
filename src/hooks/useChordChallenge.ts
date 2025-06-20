@@ -12,8 +12,8 @@ export function useChordChallenge(midiNotes: number[], clearNotes: () => void) {
         if (candidates.includes(targetChord)) {
             setIsCorrect(true);
             celebrate();
-            clearNotes();
             setTimeout(() => {
+                clearNotes();
                 setIsCorrect(false);
                 setTargetChord(getTargetChord());
             }, 1000);
