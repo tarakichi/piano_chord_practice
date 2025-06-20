@@ -22,11 +22,6 @@ export default function TargetChordDisplay({ targetChord, isCorrect }: Props) {
                 >
                     正解
                 </div>) : ("")}
-                {/* <div
-                    className="absolute mx-1 my-3 rounded-md font-medium text-2xl text-zinc-50 bg-zinc-700 py-3 px-5"
-                >
-                    正解
-                </div> */}
             </div>
         </div>
     )
