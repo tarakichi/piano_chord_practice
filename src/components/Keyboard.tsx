@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 interface Props {
-    midiNotes?: number[];
+    midiNotes: number[];
     addNote: (note: number) => void;
     removeNote: (note: number) => void;
 }
@@ -108,7 +108,7 @@ function generateBlackKeyRenderItems(
                 key: k.pitch,
                 isKey: true,
                 isActive: isActive,
-                className: `black-key pointer-events-auto${isActive ? " active": ""}`,
+                className: `black-key${isActive ? " active": ""}`,
                 midi: k.midi
             });
         }

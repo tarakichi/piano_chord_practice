@@ -11,7 +11,7 @@
         @apply h-55 w-8 mr-6
     }
     .black-key {
-        @apply bg-zinc-900 rounded-md h-55 w-8 mr-6 outline-1 outline-zinc-800 -outline-offset-1;
+        @apply bg-zinc-900 rounded-md h-55 w-8 mr-6 pointer-events-auto outline-1 outline-zinc-800 -outline-offset-1;
     }
     .active {
         @apply brightness-60 translate-y-2;
@@ -43,4 +43,11 @@
     input:checked + .slider::before {
         @apply translate-x-5
     }
+    .stable-scrollbar {
+        scrollbar-gutter: stable;
+    }
+}
+
+body::-webkit-scrollbar{
+  display:none;
 }
