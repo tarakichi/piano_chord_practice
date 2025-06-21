@@ -21,7 +21,7 @@
         @apply max-h-14 overflow-x-hidden overflow-y-auto max-w-4/5 h-14
     }
     .chord-list {
-        @apply max-h-28 overflow-x-hidden overflow-y-auto max-w-4/5 h-28
+        @apply max-h-28 overflow-y-auto w-250 h-28
     }
 
     .switch {

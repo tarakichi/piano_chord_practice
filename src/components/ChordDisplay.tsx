@@ -20,7 +20,7 @@ export default function ChordDisplay({ midiNotes, setUserChords }: Props) {
     const otherChords = chordCandidates.filter((chord) => chord.score < 100);
 
     return (
-        <div className="mt-5">
+        <div className="ml-5">
             <h2 className='text-zinc-50 font-bold text-xl'>和音の検出</h2>
             <div className="bg-zinc-800 rounded-md my-2 mx-auto chord-list">
                 {midiNotes.length === 0 ? (
