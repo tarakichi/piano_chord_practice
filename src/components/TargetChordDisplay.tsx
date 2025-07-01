@@ -5,7 +5,7 @@ interface Props {
 
 export default function TargetChordDisplay({ targetChord, isCorrect }: Props) {
     return (
-        <div className="mr-5">
+        <div className="">
             <h2 className='text-zinc-50 font-bold text-xl'>目標コード</h2>
             <div className="flex justify-center items-center bg-zinc-800 rounded-md my-2 mx-auto overflow-x-hidden overflow-y-auto h-28 w-100">
                 <div
