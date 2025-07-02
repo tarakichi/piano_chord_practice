@@ -20,9 +20,9 @@ export default function ChordDisplay({ midiNotes, setUserChords }: Props) {
     const otherChords = chordCandidates.filter((chord) => chord.score < 100);
 
     return (
-        <div className="">
+        <div className="w-full flex flex-col items-center justify-center">
             <h2 className='text-zinc-50 font-bold text-xl'>和音の検出</h2>
-            <div className="bg-zinc-800 rounded-md my-2 mx-auto chord-list">
+            <div className="bg-zinc-800 rounded-md my-2 py-1 px-8 max-h-28 h-28 overflow-y-auto w-4/5">
                 {midiNotes.length === 0 ? (
                     <p className='mx-1 my-3 py-1 px-2 text-zinc-50'>キーが押されていません</p>
                 ) : chordCandidates.length === 0 ? (
