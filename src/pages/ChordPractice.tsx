@@ -16,7 +16,7 @@ export default function ChordPractice() {
       animate={{ opacity: 1 }}
       transition={{ duration: 1 }}
     >
-      <div className="max-w-screen w-screen flex flex-col items-center">
+      <div className="max-w-screen w-screen flex max-md:flex-col items-center">
         <TargetChordDisplay targetChord={targetChord} isCorrect={isCorrect}/>
         <ChordDisplay midiNotes={midiNotes}/>
       </div>
