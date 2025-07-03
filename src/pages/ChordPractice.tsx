@@ -20,7 +20,7 @@ export default function ChordPractice() {
         <TargetChordDisplay targetChord={targetChord} isCorrect={isCorrect}/>
         <ChordDisplay midiNotes={midiNotes}/>
       </div>
-      <Keyboard midiNotes={midiNotes} addNote={addNote} removeNote={removeNote}/>
+      <Keyboard midiNotes={midiNotes} addNote={addNote} removeNote={removeNote} clearNotes={clearNotes}/>
       <MidiInputViewer midiNotes={midiNotes}/>
     </motion.div>
   );

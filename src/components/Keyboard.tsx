@@ -4,6 +4,7 @@ interface Props {
     midiNotes: number[];
     addNote: (note: number) => void;
     removeNote: (note: number) => void;
+    clearNotes: () => void;
 }
 
 const noteNames = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
@@ -117,11 +118,15 @@ function generateBlackKeyRenderItems(
     return items;
 }
 
-export default function Keyboard({ midiNotes = [], addNote, removeNote }: Props) {
+export default function Keyboard({ midiNotes = [], addNote, removeNote, clearNotes}: Props) {
 
     const [isFullRange, setIsFullRange] = useState(false);
     const activeNotesName = midiNotes.map(n => getNoteName(n));
     const keys = isFullRange ? generateKeyboardRange(21, 108) : generateKeyboardRange(60, 71);
+    const handleChangeKeyboardRange = () => {
+        setIsFullRange(!isFullRange);
+        clearNotes();
+    }
 
     return (
         <>
@@ -133,7 +138,7 @@ export default function Keyboard({ midiNotes = [], addNote, removeNote }: Props)
                                 id="keyboard-view-range"
                                 type="checkbox"
                                 checked={isFullRange}
-                                onChange={() => setIsFullRange(!isFullRange)}
+                                onChange={handleChangeKeyboardRange}
                             />
                             <span className="slider round"></span>
                         </label>
