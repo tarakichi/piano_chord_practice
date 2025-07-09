@@ -8,7 +8,7 @@ interface Props {
 
 export default function ChordDisplay({ midiNotes, setUserChords }: Props) {
 
-    const chordCandidates = detectChords(midiNotes);
+    const chordCandidates = detectChords(midiNotes, false);
 
     const topChords = chordCandidates.filter((chord) => chord.score === 100);
     if (setUserChords) {

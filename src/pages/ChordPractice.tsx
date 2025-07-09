@@ -5,10 +5,16 @@ import Keyboard from '../components/Keyboard';
 import TargetChordDisplay from '../components/TargetChordDisplay';
 import { useMidiInput } from '../hooks/useMidiInput';
 import { useChordChallenge } from '../hooks/useChordChallenge';
+import { useCallback, useState } from "react";
 
 export default function ChordPractice() {
   const { midiNotes, addNote, removeNote, clearNotes } = useMidiInput();
-  const { targetChord, isCorrect } = useChordChallenge(midiNotes, clearNotes);
+  const [isStrict, setIsStrict] = useState<boolean>(false);
+  const { targetChord, isCorrect } = useChordChallenge(midiNotes, clearNotes, isStrict);
+
+  const handleStrict = useCallback(() => {
+      setIsStrict(!isStrict);  
+  }, [isStrict]);
 
   return (
     <motion.div
@@ -17,6 +23,22 @@ export default function ChordPractice() {
       transition={{ duration: 1 }}
     >
       <div className="max-w-screen w-screen flex max-md:flex-col items-center">
+        <div className="w-screen flex flex-col justify-center items-center">
+            <div className="flex items-start w-4/5">
+              <div className="flex items-center mx-1">
+                <label className="switch">
+                  <input
+                      id="keyboard-view-range"
+                      type="checkbox"
+                      checked={isStrict}
+                      onChange={handleStrict}
+                  />
+                  <span className="slider round"></span>
+                </label>
+                <span className="m-2 text-zinc-50">{isStrict ? "厳密" : "厳密"}</span>
+              </div>
+            </div>
+          </div>
         <TargetChordDisplay targetChord={targetChord} isCorrect={isCorrect}/>
         <ChordDisplay midiNotes={midiNotes}/>
       </div>
