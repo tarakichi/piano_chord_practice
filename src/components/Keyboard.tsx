@@ -1,10 +1,8 @@
-import { useState } from "react";
-
 interface Props {
     midiNotes: number[];
     addNote: (note: number) => void;
     removeNote: (note: number) => void;
-    clearNotes: () => void;
+    isFullRange: boolean;
 }
 
 const noteNames = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
@@ -118,33 +116,16 @@ function generateBlackKeyRenderItems(
     return items;
 }
 
-export default function Keyboard({ midiNotes = [], addNote, removeNote, clearNotes}: Props) {
+export default function Keyboard({ midiNotes = [], addNote, removeNote, isFullRange}: Props) {
 
-    const [isFullRange, setIsFullRange] = useState(false);
     const activeNotesName = midiNotes.map(n => getNoteName(n));
     const keys = isFullRange ? generateKeyboardRange(21, 108) : generateKeyboardRange(60, 71);
-    const handleChangeKeyboardRange = () => {
-        setIsFullRange(!isFullRange);
-        clearNotes();
-    }
+    
 
     return (
         <>
             <div className="w-screen flex flex-col justify-center items-center">
-                <div className="flex items-start w-4/5">
-                    <div className="flex items-center mx-1">
-                        <label className="switch">
-                            <input
-                                id="keyboard-view-range"
-                                type="checkbox"
-                                checked={isFullRange}
-                                onChange={handleChangeKeyboardRange}
-                            />
-                            <span className="slider round"></span>
-                        </label>
-                        <span className="m-2 text-zinc-50">{isFullRange ? "88鍵" : "88鍵"}</span>
-                    </div>
-                </div>
+                
             </div>
             <div className="overflow-x-auto overflow-y-hidden w-screen h-87 px-10 mt-3">
                 <div className="relative mx-auto mt-2 mb-5 w-fit">
