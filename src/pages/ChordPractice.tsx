@@ -28,42 +28,46 @@ export default function ChordPractice() {
       animate={{ opacity: 1 }}
       transition={{ duration: 1 }}
     >
-      <div className="max-w-screen w-screen flex max-md:flex-col items-center">
-        <div className="w-screen flex flex-col justify-center items-center">
-            <div className="flex items-start w-4/5">
-              <div className="flex items-center mx-1">
-                <label className="switch">
-                  <input
-                      id="keyboard-view-range"
-                      type="checkbox"
-                      checked={isStrict}
-                      onChange={handleStrict}
-                  />
-                  <span className="slider round"></span>
-                </label>
-                <span className="m-2 text-zinc-50">{isStrict ? "厳密" : "厳密"}</span>
-              </div>
-            </div>
-            <div className="flex items-start w-4/5">
-                <div className="flex items-center mx-1">
-                  <label className="switch">
-                    <input
-                      id="keyboard-view-range"
-                      type="checkbox"
-                      checked={isFullRange}
-                      onChange={handleChangeKeyboardRange}
-                    />
-                    <span className="slider round"></span>
-                  </label>
-                  <span className="m-2 text-zinc-50">{isFullRange ? "88鍵" : "88鍵"}</span>
-                </div>
+      <div className="max-w-screen w-screen">
+        <div className="w-full flex px-3 py-2 bg-gray-800">
+          <div className="flex items-start">
+            <div className="flex items-center mx-1">
+              <label className="switch">
+                <input
+                  id="keyboard-view-range"
+                  type="checkbox"
+                  checked={isStrict}
+                  onChange={handleStrict}
+                />
+                <span className="slider round"></span>
+              </label>
+              <span className="m-2 text-zinc-50">{isStrict ? "厳密" : "厳密"}</span>
             </div>
           </div>
-        <TargetChordDisplay targetChord={targetChord} isCorrect={isCorrect}/>
-        <ChordDisplay midiNotes={midiNotes}/>
+          <div className="flex items-start">
+            <div className="flex items-center mx-1">
+              <label className="switch">
+                <input
+                  id="keyboard-view-range"
+                  type="checkbox"
+                  checked={isFullRange}
+                  onChange={handleChangeKeyboardRange}
+                />
+                <span className="slider round"></span>
+              </label>
+              <span className="m-2 text-zinc-50">{isFullRange ? "88鍵" : "88鍵"}</span>
+            </div>
+          </div>
+        </div>
+        <div className="w-screen flex justify-center items-center">
+          <div className="max-w-screen w-screen flex max-md:flex-col items-center">
+            <TargetChordDisplay targetChord={targetChord} isCorrect={isCorrect}/>
+            <ChordDisplay midiNotes={midiNotes}/>
+          </div>
+        </div>
+        <Keyboard midiNotes={midiNotes} addNote={addNote} removeNote={removeNote} isFullRange={isFullRange} />
+        <MidiInputViewer midiNotes={midiNotes}/>
       </div>
-      <Keyboard midiNotes={midiNotes} addNote={addNote} removeNote={removeNote} isFullRange={isFullRange} />
-      <MidiInputViewer midiNotes={midiNotes}/>
     </motion.div>
   );
 }
