@@ -9,9 +9,9 @@ import { useCallback, useState } from "react";
 
 export default function ChordPractice() {
   const { midiNotes, addNote, removeNote, clearNotes } = useMidiInput();
-  const [isStrict, setIsStrict] = useState<boolean>(false);
+  const [ isStrict, setIsStrict ] = useState<boolean>(false);
   const { targetChord, isCorrect } = useChordChallenge(midiNotes, clearNotes, isStrict);
-  const [isFullRange, setIsFullRange] = useState(false);
+  const [ isFullRange, setIsFullRange ] = useState(false);
 
   const handleChangeKeyboardRange = () => {
     setIsFullRange(!isFullRange);
