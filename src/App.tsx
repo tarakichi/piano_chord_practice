@@ -5,7 +5,7 @@ function App() {
   return (
     <Router>
       <Routes>
-          <Route path="/" element={<ChordPractice/>} />
+          <Route path="/piano_chord_practice" element={<ChordPractice/>} />
       </Routes>
     </Router>
   )
